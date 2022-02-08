@@ -4,10 +4,17 @@
 ListeSem initSem(){
     return NULL;
 }
+
+int videListe(ListeSem liste){
+    return l == NULL;
+}
+
 void tete(ListeSem liste){
-    if(liste==NULL){
-        
+    if(videListe(liste)){
+        printf("Operation interdite\n");
+        exit(1);
     }
+    return (liste->semaine);
 }
 void insererEnTete(ListeSem liste){
     MaillonSem *sem;
