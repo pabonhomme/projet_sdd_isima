@@ -7,15 +7,10 @@
 #include "action.h"
 #endif
 
-typedef enum
-{
-	faux,vrai
-}Boolen_t;
-
 typedef struct{
     char annee[5];
     char sem[3];
-    struct action *action;
+    MaillonAction_t *actions;
 }Semaine_t;
 
 typedef struct maillonSem_t{
@@ -25,9 +20,10 @@ typedef struct maillonSem_t{
 
 // FONCTIONS LISTE SEMAINE
 ListeSem_t initSem(void);
-Boolen_t videListe(ListeSem_t liste);
+Boolen_t videListeSem(ListeSem_t liste);
 Semaine_t tete(ListeSem_t liste);
 ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
 ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
 Semaine_t lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
+// ListeSem_t verifSemaines(ListeSem_t listeSemaines, Semaine_t s);
