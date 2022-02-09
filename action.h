@@ -6,12 +6,12 @@
 #include <string.h>
 #endif
 
-typedef struct action{
+typedef struct{
     char jheure[4];
     char action[10];
-}Action;
+}Action_t;
 
-typedef struct maillonAction{
-    Action action;
-    struct action *suiv;
-}MaillonAction, *ListeAction;
+typedef struct maillonAction_t{
+    Action_t action;
+    struct maillonAction_t *suiv;
+}MaillonAction_t, *ListeAction_t;

@@ -10,24 +10,24 @@
 typedef enum
 {
 	faux,vrai
-}Boolen;
+}Boolen_t;
 
 typedef struct{
     char annee[5];
     char sem[3];
     struct action *action;
-}Semaine;
+}Semaine_t;
 
-typedef struct maillonSem{
-    Semaine semaine;
-    struct maillonSem *suiv;
-}MaillonSem, *ListeSem;
+typedef struct maillonSem_t{
+    Semaine_t semaine;
+    struct maillonSem_t *suiv;
+}MaillonSem_t, *ListeSem_t;
 
 // FONCTIONS LISTE SEMAINE
-ListeSem initSem(void);
-Boolen videListe(ListeSem liste);
-Semaine tete(ListeSem liste);
-ListeSem insererEnTete(ListeSem liste, Semaine s);
-ListeSem inserer(ListeSem liste, Semaine sem);
-Semaine lireSemaine (FILE *flot);
-ListeSem chargeSemaine (char* nomFichier, ListeSem liste);
+ListeSem_t initSem(void);
+Boolen_t videListe(ListeSem_t liste);
+Semaine_t tete(ListeSem_t liste);
+ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
+ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
+Semaine_t lireSemaine (FILE *flot);
+ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);

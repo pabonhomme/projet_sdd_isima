@@ -8,7 +8,7 @@ En entrée: void
 En sortie: 
 
  -------------------------------------------------------------------- */
-ListeSem initSem(void){
+ListeSem_t initSem(void){
     return NULL;
 }
 
@@ -20,7 +20,7 @@ En entrée: la liste
 En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
  -------------------------------------------------------------------- */
-Boolen videListe(ListeSem liste){
+Boolen_t videListe(ListeSem_t liste){
     if(liste==NULL)
         return vrai;
 
@@ -35,7 +35,7 @@ En entrée: la liste des semaines
 En sortie: la première semaine de la liste, NULL sinon
 
  -------------------------------------------------------------------- */
-Semaine tete(ListeSem liste){
+Semaine_t tete(ListeSem_t liste){
     if(videListe(liste)){
         printf("Opération interdite\n");
             exit(1);
@@ -53,9 +53,9 @@ En entrée: liste : la liste des semaines; s : la semaine à inserer
 En sortie: La liste avec l'élement en tête
 
  -------------------------------------------------------------------- */
-ListeSem insererEnTete(ListeSem liste, Semaine s){
-    MaillonSem *sem;
-    sem=(MaillonSem*)malloc(sizeof(MaillonSem)); // allocation d'un maillon
+ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s){
+    MaillonSem_t *sem;
+    sem=(MaillonSem_t*)malloc(sizeof(MaillonSem_t)); // allocation d'un maillon
     if (sem==NULL){
         printf("Probleme malloc\n");
         exit(1);
@@ -73,8 +73,8 @@ En entrée: liste : la liste des semaines; s : la semaine à inserer
 En sortie: La liste avec l'élement inséré
 
  -------------------------------------------------------------------- */
-ListeSem inserer(ListeSem liste, Semaine sem){
-    Semaine s_aux;
+ListeSem_t inserer(ListeSem_t liste, Semaine_t sem){
+    Semaine_t s_aux;
     if(videListe(liste)){
         return insererEnTete(liste, sem); // si la liste est vide, on insère en tête
     }
@@ -94,8 +94,8 @@ En entrée: flot : pointeur sur le fichier à lire
 En sortie: semaine lue
 
  -------------------------------------------------------------------- */
-Semaine lireSemaine (FILE *flot)
-{   Semaine s;
+Semaine_t lireSemaine (FILE *flot)
+{   Semaine_t s;
     
     return s;
 }
@@ -108,9 +108,9 @@ En entrée: nomFichier : Nom du fichier à lire ; liste : la liste des semaines
 En sortie: La liste avec les semaines insérées
 
  -------------------------------------------------------------------- */
-ListeSem chargeSemaine(char* nomFichier, ListeSem liste)
+ListeSem_t chargeSemaine(char* nomFichier, ListeSem_t liste)
 {   int i;
-    Semaine s;
+    Semaine_t s;
     FILE*flot;
     flot=fopen(nomFichier,"r");
 
