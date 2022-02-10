@@ -135,7 +135,7 @@ En sortie: semaine lue
 Semaine_t lireSemaine (FILE *flot)
 {   Semaine_t s;
     Action_t a;
-    fscanf(flot,"%4s%2s%d%2s%[^\n]%*c", s.annee, s.sem, a.jour, a.heure, a.action);
+    fscanf(flot,"%4s %2s %d %2s %[^\n]%*c", s.annee, s.sem, &a.jour, a.heure, a.action);
     s.actions = insererAction(initAction(), a); // on crée un premier maillon pour la liste d'actions de la semaine
     return s;
 }

@@ -110,3 +110,12 @@ Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
     }
     return faux;
 }
+void AffichListeAction(ListeSem_t liste)
+{
+    while(!videListeAction(liste))
+    {
+        printf("\n%s\t%s\n",(liste->action).action);
+        liste->action=(liste->action)->suiv;
+    }
+    printf("\n\t\t┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
+}
