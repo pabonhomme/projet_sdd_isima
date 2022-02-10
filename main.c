@@ -16,8 +16,31 @@ void affichMenu(void)
         printf("\n              *****************************************************\n");
         printf("\n\n\n\n\n\n\nChoix :");
 }
+void menu(){
+    int choix;
+    affichMenu();
+    scanf("%d", &choix);
+    while(choix>0 && choix<4){
+        switch(choix){
+            case 0:
+                exit(1);
+            break;
+            case 1:
+                printf("Tests\n");
+            break;
+            case 2:
+                printf("Semaine\n");
+            break;
+            case 3:
+                printf("action\n");
+            break;
+        }
+        affichMenu();
+        scanf("%d", &choix);
+    }
+}
 
 int main(int argc, char *argv[]){
-	affichMenu();
+    menu();
 	return 0;
 }
