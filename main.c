@@ -18,6 +18,10 @@ void affichMenu(void)
 }
 void menu(){
     int choix;
+    ListeSem_t liste = initSem();
+
+    liste = chargeSemaine("semaines.txt", liste);
+
     affichMenu();
     scanf("%d", &choix);
     while(choix>0 && choix<4){
@@ -27,6 +31,7 @@ void menu(){
             break;
             case 1:
                 printf("Tests\n");
+                AffichListeSem(liste);
             break;
             case 2:
                 printf("Semaine\n");

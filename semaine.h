@@ -24,6 +24,8 @@ Boolen_t videListeSem(ListeSem_t liste);
 Semaine_t tete(ListeSem_t liste);
 ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
 ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
+void AffichListeSem(ListeSem_t liste);
+Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[]);
 Semaine_t lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
 // ListeSem_t verifSemaines(ListeSem_t listeSemaines, Semaine_t s);

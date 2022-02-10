@@ -38,7 +38,7 @@ En sortie: la première semaine de la liste, NULL sinon
 Semaine_t tete(ListeSem_t liste){
     if(videListeSem(liste)){
         printf("Opération interdite\n");
-            exit(1);
+        exit(1);
     }
     else{
         return (liste->semaine);
@@ -91,6 +91,16 @@ ListeSem_t inserer(ListeSem_t liste, Semaine_t sem){
     }
     liste->suiv = inserer(liste->suiv, sem);
     return liste;
+}
+
+void AffichListeSem(ListeSem_t liste)
+{
+    while(!videListeSem(liste))
+    {
+        printf("\n%s\t%s\n",(liste->semaine).annee, (liste->semaine).sem);
+        liste=liste->suiv;
+    }
+    printf("\n\t\t┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
 }
 
 /* --------------------------------------------------------------------
