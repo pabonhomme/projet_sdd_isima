@@ -14,7 +14,7 @@ typedef enum
 typedef struct{
 	int jour;
     char heure[3];
-    char action[11];
+    char nomAction[11];
 }Action_t;
 
 typedef struct maillonAction_t{
@@ -29,3 +29,4 @@ Action_t teteAction(ListeAction_t liste);
 ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a);
 ListeAction_t insererAction(ListeAction_t liste, Action_t a);
 Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
+void AffichListeActions(ListeAction_t liste);

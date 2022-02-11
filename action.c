@@ -21,10 +21,12 @@ En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
  -------------------------------------------------------------------- */
 Boolen_t videListeAction(ListeAction_t liste){
-    if(liste==NULL)
-        return vrai;
+    Boolen_t resultat = faux;
 
-    return faux;
+    if(liste==NULL)
+        resultat = vrai;
+
+    return resultat;
 }
 
 /* --------------------------------------------------------------------
@@ -36,6 +38,7 @@ En sortie: la première action de la liste, NULL sinon
 
  -------------------------------------------------------------------- */
 Action_t teteAction(ListeAction_t liste){
+
     if(videListeAction(liste)){
         printf("Opération interdite\n");
             exit(1);
@@ -55,6 +58,7 @@ En sortie: La liste avec l'élement en tête
  -------------------------------------------------------------------- */
 ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a){
     MaillonAction_t *act;
+
     act=(MaillonAction_t*)malloc(sizeof(MaillonAction_t)); // allocation d'un maillon
     if (act==NULL){
         printf("Probleme malloc\n");
@@ -75,16 +79,20 @@ En sortie: La liste avec l'élement inséré
  -------------------------------------------------------------------- */
 ListeAction_t insererAction(ListeAction_t liste, Action_t a){
     Action_t a_aux;
+
     if(videListeAction(liste)){
         return insererEnTeteAction(liste, a); // si la liste est vide, on insère en tête
     }
+
     a_aux = teteAction(liste); // si la liste n'est pas vide on récupère la tête
+
     if(a_aux.jour > a.jour){
         return insererEnTeteAction(liste, a); // si jour tete de liste superieure au jour de la semaine à inserer, on insère en tête
     }
     if(a_aux.jour == a.jour && strcmp(a_aux.heure, a.heure) > 0){
         return insererEnTeteAction(liste, a);  // si heure tete de liste superieure à l'heure de la journée à inserer, on insère en tête
     }
+
     liste->suiv = insererAction(liste->suiv, a);
     return liste;
 }
@@ -97,25 +105,28 @@ En entrée: liste : la liste des actions; jour et heure : le jour et l'heure de 
 En sortie: un Boolen, vrai si l'action existe, faux sinon
 
  -------------------------------------------------------------------- */
-Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
-{   
+Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]){   
+    Boolen_t resultat = faux;
 
     while(liste!=NULL)
     {
         if((liste->action).jour==jour && strcmp((liste->action).heure, heure) == 0)
             {
-                return vrai;
+                resultat = vrai;
             }
         liste=liste->suiv;
     }
-    return faux;
+    return resultat;
 }
-void AffichListeAction(ListeSem_t liste)
+
+
+void AffichListeActions(ListeAction_t liste)
 {
+    printf("\n------Liste des actions------\n");
     while(!videListeAction(liste))
     {
-        printf("\n%s\t%s\n",(liste->action).action);
-        liste->action=(liste->action)->suiv;
+        printf("\nNom de l\'action : %s\nJour : %d\t Heure : %s\n",(liste->action).nomAction, (liste->action).jour, (liste->action).heure);
+        liste=liste->suiv;
     }
-    printf("\n\t\t┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
+    printf("\n-----------------------------\n");
 }
