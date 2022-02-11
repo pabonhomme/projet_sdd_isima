@@ -1,3 +1,14 @@
+/**
+ * @file semaine.h
+ * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
+ * @brief fichier .h : déclaration des types, constantes et prototypes pour les semaines
+ * @version 0.1
+ * @date 2022-02-11
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #ifndef projet
 #define projet
 
@@ -28,4 +39,3 @@ void AffichListeSem(ListeSem_t liste);
 Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[]);
 Semaine_t lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
-// ListeSem_t verifSemaines(ListeSem_t listeSemaines, Semaine_t s);

@@ -1,3 +1,14 @@
+/**
+ * @file semaine.c
+ * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
+ * @brief fichier .c : fonctions de base pour les semaines, chargement des listes à partir d'un fichier
+ * @version 0.1
+* @date 2022-02-11
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include "semaine.h"
 
 /* --------------------------------------------------------------------
@@ -8,7 +19,8 @@ En entrée: void
 En sortie: 
 
  -------------------------------------------------------------------- */
-ListeSem_t initSem(void){
+ListeSem_t initSem(void)
+{
     return NULL;
 }
 
@@ -20,7 +32,8 @@ En entrée: la liste
 En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
  -------------------------------------------------------------------- */
-Boolen_t videListeSem(ListeSem_t liste){
+Boolen_t videListeSem(ListeSem_t liste)
+{
     Boolen_t resultat = faux;
 
     if(liste==NULL)
@@ -37,13 +50,16 @@ En entrée: la liste des semaines
 En sortie: la première semaine de la liste, NULL sinon
 
  -------------------------------------------------------------------- */
-Semaine_t tete(ListeSem_t liste){
+Semaine_t tete(ListeSem_t liste)
+{
 
-    if(videListeSem(liste)){
+    if(videListeSem(liste))
+    {
         printf("Opération interdite\n");
         exit(1);
     }
-    else{
+    else
+    {
         return (liste->semaine);
     }
 }
@@ -56,11 +72,13 @@ En entrée: liste : la liste des semaines; s : la semaine à inserer
 En sortie: La liste avec l'élement en tête
 
  -------------------------------------------------------------------- */
-ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s){
+ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s)
+{
     MaillonSem_t *sem;
 
     sem=(MaillonSem_t*)malloc(sizeof(MaillonSem_t)); // allocation d'un maillon
-    if (sem==NULL){
+    if (sem==NULL)
+    {
         printf("Probleme malloc\n");
         exit(1);
     }
@@ -78,22 +96,27 @@ En entrée: liste : la liste des semaines; s : la semaine à inserer
 En sortie: La liste avec l'élement inséré
 
  -------------------------------------------------------------------- */
-ListeSem_t inserer(ListeSem_t liste, Semaine_t sem){
+ListeSem_t inserer(ListeSem_t liste, Semaine_t sem)
+{
     Semaine_t s_aux;
 
-    if(videListeSem(liste)){
+    if(videListeSem(liste))
+    {
         return insererEnTete(liste, sem); // si la liste est vide, on insère en tête
     }
 
     s_aux = tete(liste); // si la liste n'est pas vide on récupère la tête
 
-    if(strcmp(s_aux.annee, sem.annee) > 0){
+    if(strcmp(s_aux.annee, sem.annee) > 0)
+    {
         return insererEnTete(liste, sem); // si annee tete de liste superieure à l'année de la semaine à inserer, on insère en tête
     }
-    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) > 0){
+    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) > 0)
+    {
         return insererEnTete(liste, sem); // si annee tete de liste égale à l'année de la semaine à insérer et semaine de la tete supériere, on insère en tête
     }
-    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) == 0){
+    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) == 0)
+    {
 
         (liste->semaine).actions = insererAction((liste->semaine).actions, (sem.actions)->action); // on insère l'action dans la liste d'action de la semaine en question
         return liste;
@@ -131,15 +154,16 @@ En entrée: liste : la liste des semaines; annee et sem : l'année et la semaine
 En sortie: un Boolen, vrai si l'action existe, faux sinon
 
  -------------------------------------------------------------------- */
-Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[]){
+Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[])
+{
     Boolen_t resultat = faux;
 
     while(liste!=NULL)
     {
         if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).sem, sem) == 0)
-            {
-                resultat = vrai;
-            }
+        {
+            resultat = vrai;
+        }
         liste=liste->suiv;
     }
     return resultat;
@@ -181,21 +205,22 @@ ListeSem_t chargeSemaine(char* nomFichier, ListeSem_t listeSemaines)
     flot=fopen(nomFichier,"r");
 
     if (flot == NULL)
-        {
-            printf("Problème d'ouverture du fichier\n");
-        }
+    {
+        printf("Problème d'ouverture du fichier\n");
+    }
     if (feof(flot))
-        {
-            printf("fichier vide\n");
-            return listeSemaines;
-        }
+    {
+        printf("fichier vide\n");
+        return listeSemaines;
+    }
+    
     s=lireSemaine(flot);
     while(!feof(flot))
-        {
-            listeSemaines=inserer(listeSemaines, s);
-            s=lireSemaine(flot);
-           
-        }
+    {
+        listeSemaines=inserer(listeSemaines, s);
+        s=lireSemaine(flot);   
+    }
+
     fclose(flot);
     return listeSemaines;
 }

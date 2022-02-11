@@ -1,7 +1,17 @@
+/**
+ * @file main.c
+ * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
+ * @brief fichier .c : fonction main qui affiche et gère le menu
+ * @version 0.1
+* @date 2022-02-11
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include "semaine.h"
 
-void affichMenu(void)
-    
+void affichMenu(void) 
 {   
     printf("\n\n             *******************************************************\n");
         printf("             *                                                      *\n");
@@ -16,15 +26,17 @@ void affichMenu(void)
         printf("\nChoix :");
 }
 void menu(){
-    int choix;
+    int        choix;
     ListeSem_t liste = initSem();
 
     liste = chargeSemaine("semaines.txt", liste);
 
     affichMenu();
     scanf("%d", &choix);
-    while(choix>0 && choix<4){
-        switch(choix){
+    while(choix>0 && choix<4)
+    {
+        switch(choix)
+        {
             case 0:
                 exit(1);
             break;
@@ -44,7 +56,8 @@ void menu(){
     }
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
     menu();
 	return 0;
 }
