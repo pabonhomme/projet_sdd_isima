@@ -3,7 +3,7 @@
  * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
  * @brief fichier .c : fonctions de base pour les semaines, chargement des listes à partir d'un fichier
  * @version 0.1
-* @date 2022-02-11
+ * @date 2022-02-11
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -173,7 +173,7 @@ Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[])
 
     while(liste!=NULL)
     {
-        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, sem) == 0)
+        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, sem) == 0) // si on trouve la semaine voulue
         {
             resultat = vrai;
         }
@@ -195,7 +195,7 @@ Semaine_t lireSemaine (FILE *flot)
     Action_t  act;
     char      jour;
 
-    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nomAction);
+    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nomAction); // lecture d'une ligne 
     act.jour = jour - '0';
     sem.actions = insererAction(initAction(), act); // on crée un premier maillon pour la liste d'actions de la semaine
     
@@ -211,29 +211,57 @@ En sortie: La liste avec les semaines insérées
 
  -------------------------------------------------------------------- */
 ListeSem_t chargeSemaine(char* nomFichier, ListeSem_t listeSemaines)
-{   int       i;
+{   
     Semaine_t s;
     FILE    * flot;
 
-    flot=fopen(nomFichier,"r");
+    flot=fopen(nomFichier,"r"); // ouverture du fichier en lecture
 
-    if (flot == NULL)
+    if (flot == NULL) // si l'ouverture s'est mal passee
     {
         printf("Problème d'ouverture du fichier\n");
     }
-    if (feof(flot))
+    if (feof(flot)) // si le fichier est vide
     {
         printf("fichier vide\n");
         return listeSemaines;
     }
     
-    s=lireSemaine(flot);
+    s=lireSemaine(flot); // lecture d'une semaine
     while(!feof(flot))
     {
-        listeSemaines=inserer(listeSemaines, s);
-        s=lireSemaine(flot);   
+        listeSemaines=inserer(listeSemaines, s); // insertion de la semaine dans la liste
+        s=lireSemaine(flot); // lecture d'une semaine
     }
 
     fclose(flot);
     return listeSemaines;
+}
+
+/* --------------------------------------------------------------------
+sauvegarder : sauvegarde les semaines et les actions dans un fichier
+ 
+En entrée: nomFichier : Nom du fichier dans lequel ecrire ; listeSemaines : la liste des semaines
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
+void sauvegarder(char* nomFichier, ListeSem_t listeSemaines)
+{
+    FILE * flot;
+
+    flot=fopen(nomFichier,"w"); // ouverture du fichier en ecriture
+
+    if (flot == NULL) // si l'ouverture s'est mal passee
+    {
+        printf("Problème d'ouverture du fichier\n");
+    }
+
+    while(!videListeSem(listeSemaines)) // parcours de la liste des semaines
+    {
+        sauvegarderAction(flot, (listeSemaines->semaine).actions, (listeSemaines->semaine).annee,(listeSemaines->semaine).numSem);
+        listeSemaines = listeSemaines->suiv;
+    }
+
+    fclose(flot);
 }

@@ -18,25 +18,32 @@
 #include "action.h"
 #endif
 
-typedef struct{
-    char annee[5];
-    char numSem[3];
-    MaillonAction_t *actions;
+typedef struct
+{
+    char              annee[5];
+    char              numSem[3];
+    MaillonAction_t * actions;
 }Semaine_t;
 
-typedef struct maillonSem_t{
-    Semaine_t semaine;
-    struct maillonSem_t *suiv;
+typedef struct maillonSem_t
+{
+    Semaine_t             semaine;
+    struct maillonSem_t * suiv;
 }MaillonSem_t, *ListeSem_t;
 
 // FONCTIONS LISTE SEMAINE
 ListeSem_t initSem(void);
-Boolen_t videListeSem(ListeSem_t liste);
-Semaine_t tete(ListeSem_t liste);
+Boolen_t   videListeSem(ListeSem_t liste);
+Semaine_t  tete(ListeSem_t liste);
+
 ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
 ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
+
 void afficherSemaine(Semaine_t sem);
 void afficherListeSem(ListeSem_t liste);
-Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[]);
-Semaine_t lireSemaine (FILE *flot);
+
+Boolen_t   rechSemaine(ListeSem_t liste, char annee[], char sem[]);
+Semaine_t  lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
+
+void sauvegarder(char* nomFichier, ListeSem_t listeSemaines);

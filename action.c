@@ -3,7 +3,7 @@
  * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
  * @brief fichier .c : fonctions de base pour les actions
  * @version 0.1
-* @date 2022-02-11
+ * @date 2022-02-11
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -172,4 +172,30 @@ Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
         liste=liste->suiv;
     }
     return resultat;
+}
+
+/* --------------------------------------------------------------------
+sauvegarderAction : Ecris les semaines et actions en ligne comme le fichier initial dans un fichier
+ 
+En entrée: nomFichier : Nom du fichier dans lequel ecrire ; liste : la liste des actions
+anneeSem : annee de la liste d'actions ; numSem : numero de semaine de la liste d'actions
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
+void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* numSem)
+{   
+    if(videListeAction(liste)) // si la liste est vide
+    {   
+        return;
+    }
+    if(videListeAction(liste->suiv)) // si on se trouve sur le dernier maillon de la liste
+    {
+        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nomAction);
+    }
+    else
+    {
+        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nomAction);
+        sauvegarderAction(flot, liste->suiv, anneeSem, numSem); // appel recursif sur le maillon suivant
+    }
 }
