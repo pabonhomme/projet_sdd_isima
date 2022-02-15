@@ -111,11 +111,11 @@ ListeSem_t inserer(ListeSem_t liste, Semaine_t sem)
     {
         return insererEnTete(liste, sem); // si annee tete de liste superieure à l'année de la semaine à inserer, on insère en tête
     }
-    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) > 0)
+    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.numSem, sem.numSem) > 0)
     {
         return insererEnTete(liste, sem); // si annee tete de liste égale à l'année de la semaine à insérer et semaine de la tete supériere, on insère en tête
     }
-    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.sem, sem.sem) == 0)
+    if(strcmp(s_aux.annee, sem.annee) == 0 && strcmp(s_aux.numSem, sem.numSem) == 0)
     {
 
         (liste->semaine).actions = insererAction((liste->semaine).actions, (sem.actions)->action); // on insère l'action dans la liste d'action de la semaine en question
@@ -127,20 +127,33 @@ ListeSem_t inserer(ListeSem_t liste, Semaine_t sem)
 }
 
 /* --------------------------------------------------------------------
-AffichListeSem : Affiche la liste des semaines
+afficherSemaine : Affiche une semaine
+ 
+En entrée: sem : une semaine;
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
+void afficherSemaine(Semaine_t sem)
+{
+    printf("\nAnnee : %s\t Semaine Numero : %s\n",sem.annee, sem.numSem);
+}
+
+/* --------------------------------------------------------------------
+afficherListeSem : Affiche la liste des semaines
  
 En entrée: liste : la liste des semaines;
 
 En sortie: void
 
  -------------------------------------------------------------------- */
-void AffichListeSem(ListeSem_t liste)
+void afficherListeSem(ListeSem_t liste)
 {
     printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈Liste des Semaines┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
     while(!videListeSem(liste))
     {
-        printf("\nAnnee : %s\t Semaine Numero : %s\n",(liste->semaine).annee, (liste->semaine).sem);
-        AffichListeActions((liste->semaine).actions);
+        afficherSemaine(liste->semaine);
+        afficherListeActions((liste->semaine).actions);
         printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
         liste=liste->suiv;
     }
@@ -160,7 +173,7 @@ Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[])
 
     while(liste!=NULL)
     {
-        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).sem, sem) == 0)
+        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, sem) == 0)
         {
             resultat = vrai;
         }
@@ -178,15 +191,15 @@ En sortie: semaine lue
 
  -------------------------------------------------------------------- */
 Semaine_t lireSemaine (FILE *flot)
-{   Semaine_t s;
-    Action_t  a;
+{   Semaine_t sem;
+    Action_t  act;
     char      jour;
 
-    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", s.annee, s.sem, &jour, a.heure, a.nomAction);
-    a.jour = jour - '0';
-    s.actions = insererAction(initAction(), a); // on crée un premier maillon pour la liste d'actions de la semaine
+    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nomAction);
+    act.jour = jour - '0';
+    sem.actions = insererAction(initAction(), act); // on crée un premier maillon pour la liste d'actions de la semaine
     
-    return s;
+    return sem;
 }
 
 /* --------------------------------------------------------------------

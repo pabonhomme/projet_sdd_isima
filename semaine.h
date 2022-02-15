@@ -20,7 +20,7 @@
 
 typedef struct{
     char annee[5];
-    char sem[3];
+    char numSem[3];
     MaillonAction_t *actions;
 }Semaine_t;
 
@@ -35,7 +35,8 @@ Boolen_t videListeSem(ListeSem_t liste);
 Semaine_t tete(ListeSem_t liste);
 ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
 ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
-void AffichListeSem(ListeSem_t liste);
+void afficherSemaine(Semaine_t sem);
+void afficherListeSem(ListeSem_t liste);
 Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[]);
 Semaine_t lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);

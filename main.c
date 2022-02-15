@@ -42,7 +42,7 @@ void menu(){
             break;
             case 1:
                 
-                AffichListeSem(liste);
+                afficherListeSem(liste);
             break;
             case 2:
                 

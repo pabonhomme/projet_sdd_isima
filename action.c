@@ -120,19 +120,32 @@ ListeAction_t insererAction(ListeAction_t liste, Action_t a)
 }
 
 /* --------------------------------------------------------------------
-AffichListeActions : Affiche la liste des actions
+afficherAction : Affiche une action
+ 
+En entrée: act : une action;
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
+void afficherAction(Action_t act)
+{
+    printf("\nNom de l\'action : %s\nJour : %d\t Heure : %s\n",act.nomAction, act.jour, act.heure);
+}
+
+/* --------------------------------------------------------------------
+afficherListeActions : Affiche la liste des actions
  
 En entrée: liste : la liste des actions;
 
 En sortie: void
 
  -------------------------------------------------------------------- */
-void AffichListeActions(ListeAction_t liste)
+void afficherListeActions(ListeAction_t liste)
 {
     printf("\n------Liste des actions------\n");
     while(!videListeAction(liste))
     {
-        printf("\nNom de l\'action : %s\nJour : %d\t Heure : %s\n",(liste->action).nomAction, (liste->action).jour, (liste->action).heure);
+        afficherAction(liste->action);
         liste=liste->suiv;
     }
     printf("\n-----------------------------\n");

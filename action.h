@@ -39,5 +39,6 @@ Boolen_t videListeAction(ListeAction_t liste);
 Action_t teteAction(ListeAction_t liste);
 ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a);
 ListeAction_t insererAction(ListeAction_t liste, Action_t a);
-void AffichListeActions(ListeAction_t liste);
+void afficherAction(Action_t act);
+void afficherListeActions(ListeAction_t liste);
 Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
