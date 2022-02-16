@@ -26,7 +26,7 @@ typedef struct
 {
 	int  jour;
     char heure[3];
-    char nomAction[11];
+    char nom[11];
 }Action_t;
 
 typedef struct maillonAction_t

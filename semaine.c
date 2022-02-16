@@ -195,7 +195,7 @@ Semaine_t lireSemaine (FILE *flot)
     Action_t  act;
     char      jour;
 
-    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nomAction); // lecture d'une ligne 
+    fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nom); // lecture d'une ligne 
     act.jour = jour - '0';
     sem.actions = insererAction(initAction(), act); // on crée un premier maillon pour la liste d'actions de la semaine
     

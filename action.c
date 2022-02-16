@@ -129,7 +129,7 @@ En sortie: void
  -------------------------------------------------------------------- */
 void afficherAction(Action_t act)
 {
-    printf("\nNom de l\'action : %s\nJour : %d\t Heure : %s\n",act.nomAction, act.jour, act.heure);
+    printf("\nNom de l\'action : %s\nJour : %d\t Heure : %s\n",act.nom, act.jour, act.heure);
 }
 
 /* --------------------------------------------------------------------
@@ -191,11 +191,11 @@ void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* nu
     }
     if(videListeAction(liste->suiv)) // si on se trouve sur le dernier maillon de la liste
     {
-        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nomAction);
+        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nom);
     }
     else
     {
-        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nomAction);
+        fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nom);
         sauvegarderAction(flot, liste->suiv, anneeSem, numSem); // appel recursif sur le maillon suivant
     }
 }
