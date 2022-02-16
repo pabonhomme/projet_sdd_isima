@@ -15,12 +15,14 @@ int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jou
 	Jour_t   jour; // definition du tableau des jours
 	Boolen_t estRempli = faux; // devient vrai si le tableau atteint la taille maximale
 	Action_t act; 
+	ListeAction_t listeTemp; // liste temporaire des actions pour ne pas modifier la liste d'actions en mémoire
 
 	while(!videListeSem(listeSemaines) && !estRempli) // tant qu'il reste des semaines et que le tableau de jour a de la place
     {
-    	while(!videListeAction((listeSemaines->semaine).actions) && !estRempli) // tant qu'il reste des actions pour une semaine et que le tableau de jour a de la place
+    	listeTemp = (listeSemaines->semaine).actions;
+    	while(!videListeAction(listeTemp) && !estRempli) // tant qu'il reste des actions pour une semaine et que le tableau de jour a de la place
     	{
-    		act = teteAction((listeSemaines->semaine).actions); // recuperation de l'action en tête
+    		act = teteAction(listeTemp); // recuperation de l'action en tête
     		if(strstr(act.nom, motif)!=NULL) // si le nom de l'action contient le motif voulu
     		{
     			strcpy(jour.annee, (listeSemaines->semaine).annee); // copie de l'annee dans le jour
@@ -35,7 +37,7 @@ int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jou
 	        	else
 	        		i++; // on avance dans le tableau
     		}
-    		(listeSemaines->semaine).actions = ((listeSemaines->semaine).actions)->suiv; // on avance dans les actions
+    		listeTemp = listeTemp->suiv; // on avance dans les actions
     	}
         listeSemaines = listeSemaines->suiv; // on avance dans les semaines
     }
