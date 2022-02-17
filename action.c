@@ -27,7 +27,8 @@ ListeAction_t initAction(void)
 /* --------------------------------------------------------------------
 videListeAction : Vérifie si une liste est vide
  
-En entrée: la liste
+En entrée: 
+liste : la liste d'actions
 
 En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
@@ -45,7 +46,8 @@ Boolen_t videListeAction(ListeAction_t liste)
 /* --------------------------------------------------------------------
 tete : Renvoie le premier maillon de la liste
  
-En entrée: la liste des actions
+En entrée: 
+liste : la liste des actions
 
 En sortie: la première action de la liste, NULL sinon
 
@@ -67,14 +69,16 @@ Action_t teteAction(ListeAction_t liste)
 /* --------------------------------------------------------------------
 insererEnTeteAction : Insère une nouvelle action en tête de la liste
  
-En entrée: liste : la liste des actions; a : l'action à inserer
+En entrée: 
+liste : la liste des actions; 
+a : l'action à inserer;
 
 En sortie: La liste avec l'élement en tête
 
  -------------------------------------------------------------------- */
 ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a)
 {
-    MaillonAction_t *act;
+    MaillonAction_t *act; // maillon dans lequel on va mettre l'action
 
     act=(MaillonAction_t*)malloc(sizeof(MaillonAction_t)); // allocation d'un maillon
     if (act==NULL)
@@ -90,7 +94,9 @@ ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a)
 /* --------------------------------------------------------------------
 insererAction : insère une action
  
-En entrée: liste : la liste des actions; a : l'action à inserer
+En entrée: 
+liste : la liste des actions; 
+a : l'action à inserer;
 
 En sortie: La liste avec l'élement inséré
 
@@ -122,7 +128,8 @@ ListeAction_t insererAction(ListeAction_t liste, Action_t a)
 /* --------------------------------------------------------------------
 afficherAction : Affiche une action
  
-En entrée: act : une action;
+En entrée: 
+act : une action;
 
 En sortie: void
 
@@ -135,7 +142,8 @@ void afficherAction(Action_t act)
 /* --------------------------------------------------------------------
 afficherListeActions : Affiche la liste des actions
  
-En entrée: liste : la liste des actions;
+En entrée: 
+liste : la liste des actions;
 
 En sortie: void
 
@@ -149,29 +157,6 @@ void afficherListeActions(ListeAction_t liste)
         liste=liste->suiv;
     }
     printf("\n-----------------------------\n");
-}
-
-/* --------------------------------------------------------------------
-rechAction : recherche une action
- 
-En entrée: liste : la liste des actions; jour et heure : le jour et l'heure de l'action à trouver
-
-En sortie: un Boolen, vrai si l'action existe, faux sinon
-
- -------------------------------------------------------------------- */
-Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
-{   
-    Boolen_t resultat = faux;
-
-    while(liste!=NULL)
-    {
-        if((liste->action).jour==jour && strcmp((liste->action).heure, heure) == 0)
-        {
-            resultat = vrai;
-        }
-        liste=liste->suiv;
-    }
-    return resultat;
 }
 
 /* --------------------------------------------------------------------
@@ -198,4 +183,79 @@ void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* nu
         fprintf(flot,"%s%s%d%s%s", anneeSem, numSem, (liste->action).jour,(liste->action).heure,(liste->action).nom);
         sauvegarderAction(flot, liste->suiv, anneeSem, numSem); // appel recursif sur le maillon suivant
     }
+}
+
+/* --------------------------------------------------------------------
+rechAction : recherche une action
+ 
+En entrée: 
+liste : la liste des actions; 
+jour et heure : le jour et l'heure de l'action à trouver
+
+En sortie: un Boolen, vrai si l'action existe, faux sinon
+
+ -------------------------------------------------------------------- */
+Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
+{   
+    Boolen_t resultat = faux;
+
+    while(liste!=NULL)
+    {
+        if((liste->action).jour==jour && strcmp((liste->action).heure, heure) == 0)
+        {
+            resultat = vrai;
+        }
+        liste=liste->suiv;
+    }
+    return resultat;
+}
+
+/* --------------------------------------------------------------------
+supprimerEnTeteAction : Supprime l'action en tête de la liste
+ 
+En entrée: liste : la liste des actions;
+
+En sortie: La liste avec l'element supprimé
+
+ -------------------------------------------------------------------- */
+ListeAction_t supprimerEnTeteAction(ListeAction_t liste)
+{
+    MaillonAction_t *maillonActionTemp; // Maillon temporaire qui va permettre de supprimer la tête de liste 
+    if(videListeAction(liste)) // si la liste est vide on ne peut rien supprimer, c'est un cas d'erreur
+    {
+        printf("Suppression d'une action sur une liste vide, operation interdite");
+        exit(1);
+    }
+    maillonActionTemp = liste; // recuperation de l'action en tête de liste
+    liste = liste->suiv; // on avance la liste sur le maillon suivant
+    free(maillonActionTemp); // on libere le maillon en tete
+    return liste;
+}
+
+/* --------------------------------------------------------------------
+supprimerMaillonAction : Supprime l'action en fonction du jour et de l'heure
+ 
+En entrée: 
+liste : la liste des actions ; 
+jour : numero du jour ; 
+heure : heure de l'action a supprimer ;
+
+En sortie: La liste avec l'element supprimé
+
+ -------------------------------------------------------------------- */
+ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure)
+{   
+    Action_t actionTemp = teteAction(liste);
+
+    if(videListeAction(liste)) // si la liste est vide, on retourne la liste
+        return liste;
+    if(actionTemp.jour > jour) // si le jour en tete est > au jour voulu -> action pas dans la liste
+        return liste;
+    if(actionTemp.jour == jour && strcmp(actionTemp.heure, heure) > 0) // si le jour en tete est = au jour voulu et l'heure > -> action pas dans la liste
+        return liste;
+    if(actionTemp.jour == jour && strcmp(actionTemp.heure, heure) == 0) // si la tete vaut l'action voulue
+        return supprimerEnTeteAction(liste); // on la supprime
+
+    liste->suiv=supprimerMaillonAction(liste->suiv, jour, heure); // appel recursif
+    return liste;
 }

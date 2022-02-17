@@ -1,3 +1,14 @@
+/**
+ * @file jour.h
+ * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
+ * @brief fichier .h : déclaration des types, constantes et prototypes pour les jour
+ * @version 0.1
+ * @date 2022-02-17
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #ifndef projet
 #define projet
 
@@ -8,7 +19,7 @@
 #include "semaine.h"
 #endif
 
-#define MAX_JOUR 15
+#define MAX_JOUR 15 // taille maximale du tableau de jours pour un motif donné
 
 typedef struct 
 {

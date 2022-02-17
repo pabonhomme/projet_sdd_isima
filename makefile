@@ -7,6 +7,7 @@ all: $(EXEC)
 
 projet: main.o semaine.o jour.o action.o
 	$(CC) -o $@ $^ $(LDFLAGS)
+	@echo "\nLancer le programme avec ./projet semaines.txt"
 
 action.o: action.c action.h
 	$(CC) -o $@ -c $< $(CFLAGS)
@@ -23,6 +24,6 @@ main.o: main.c jour.h
 clean:
 	rm -rf *.o
 
-mrproper: clean
+rmExec: clean
 	rm -rf $(EXEC)
 

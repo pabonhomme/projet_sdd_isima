@@ -153,33 +153,11 @@ void afficherListeSem(ListeSem_t liste)
     while(!videListeSem(liste))
     {
         afficherSemaine(liste->semaine);
-        afficherListeActions((liste->semaine).actions);
+        if(!videListeAction((liste->semaine).actions))
+            afficherListeActions((liste->semaine).actions);
         printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
         liste=liste->suiv;
     }
-}
-
-/* --------------------------------------------------------------------
-rechSemaine : recherche une semaine
- 
-En entrée: liste : la liste des semaines; annee et sem : l'année et la semaine à trouver
-
-En sortie: un Boolen, vrai si l'action existe, faux sinon
-
- -------------------------------------------------------------------- */
-Boolen_t rechSemaine(ListeSem_t liste, char annee[], char sem[])
-{
-    Boolen_t resultat = faux;
-
-    while(liste!=NULL)
-    {
-        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, sem) == 0) // si on trouve la semaine voulue
-        {
-            resultat = vrai;
-        }
-        liste=liste->suiv;
-    }
-    return resultat;
 }
 
 /* --------------------------------------------------------------------
@@ -264,4 +242,61 @@ void sauvegarder(char* nomFichier, ListeSem_t listeSemaines)
     }
 
     fclose(flot);
+}
+
+/* --------------------------------------------------------------------
+rechSemaineAction : recherche une semaine, puis une action si la semaine est trouvée
+ 
+En entrée: liste : la liste des semaines; 
+annee et sem : l'année et la semaine à trouver
+jour et heure : me jour et l'heure de l'action à trouver
+
+En sortie: un Boolen, vrai si l'action existe, faux sinon
+
+ -------------------------------------------------------------------- */
+Boolen_t rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour, char heure[])
+{
+    Boolen_t resultat = faux;
+
+    while(liste!=NULL)
+    {
+        if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, sem) == 0) // si on trouve la semaine voulue
+        {
+            resultat = rechAction((liste->semaine).actions, jour, heure);
+        }
+        liste=liste->suiv;
+    }
+    return resultat;
+}
+
+/* --------------------------------------------------------------------
+supprimerAction : Supprime l'action en fonction de l'annee et du jour et de l'heure
+ 
+En entrée: 
+liste : la liste des actions ; 
+annee : annee de la semaine qui contient l'action a supprimer
+numSem : numero de la semaine qui contient l'action a supprimer
+jour : numero du jour de l'action a supprimer ; 
+heure : heure de l'action a supprimer ;
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
+void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure)
+{   
+    if(rechSemaineAction(liste, annee, numSem, jour, heure)) // si l'action existe dans la liste
+    {
+        while(liste!=NULL)
+        {
+            if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, numSem) == 0) // si on trouve la semaine voulue
+            {
+                (liste->semaine).actions = supprimerMaillonAction((liste->semaine).actions, jour, heure); // suppression de l'action dans la liste d'actions
+            }
+            liste=liste->suiv;
+        }
+        printf("La suppression a ete effectuee");
+    }
+    else{
+        printf("L'action a supprimer n'existe pas");
+    }
 }

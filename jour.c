@@ -1,3 +1,14 @@
+/**
+ * @file jour.c
+ * @author Paul BONHOMME & Rime LAMRANI (paul.bonhomme@etu.uca.fr & rime.lamrani@etu.uca.fr)
+ * @brief fichier .c : fonctions de recherche et d'affichage des actions pour un motif donné
+ * @version 0.1
+ * @date 2022-02-17
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include "jour.h"
 
 /* --------------------------------------------------------------------
@@ -11,10 +22,10 @@ En sortie: int : le nombre de jour trouvé
  -------------------------------------------------------------------- */
 int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jour_t *finJourTab)
 {
-	int 	 i = 0;
-	Jour_t   jour; // definition du tableau des jours
-	Boolen_t estRempli = faux; // devient vrai si le tableau atteint la taille maximale
-	Action_t act; 
+	int 	 	  i = 0;
+	Boolen_t 	  estRempli = faux; // devient vrai si le tableau atteint la taille maximale
+	Jour_t   	  jour; // definition du tableau des jours
+	Action_t 	  act; 
 	ListeAction_t listeTemp; // liste temporaire des actions pour ne pas modifier la liste d'actions en mémoire
 
 	while(!videListeSem(listeSemaines) && !estRempli) // tant qu'il reste des semaines et que le tableau de jour a de la place
@@ -32,7 +43,7 @@ int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jou
     			jour.jour = act.jour; // copie du jour
 
     			jourTab[i] = jour; // insertion du jour dans le tableau des jours
-    			if(&jourTab[i] == finJourTab) // si le jour est égal au dernier jour du tableau
+    			if(&jourTab[i] == finJourTab) // si le jour est égal au dernier jour du tableau en comparant adresse courante et pointeur de fin
     				estRempli = vrai; // le tableau est rempli
 	        	else
 	        		i++; // on avance dans le tableau

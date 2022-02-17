@@ -20,15 +20,15 @@ void affichMenu(void)
         printf("             *******************************************************\n");
         printf("\n                 1- Afficher les listes                                                                            \n ");
         printf("\n                 2- Sauvegarder la liste                                                         \n ");
-        printf("\n                 3- Afficher les jours (Donnez un motif)                                            \n ");
+        printf("\n                 3- Afficher les jours à partir d'un motif (Donnez un motif)                                            \n ");
         printf("\n                 4- Suppression d'une action                                                     \n");
-        printf("\n                 0- quitter                                                                       \n");
+        printf("\n                 5- quitter                                                                       \n");
         printf("\n              *****************************************************\n");
 }
 
 void menu(char* nomFichier){
-    int        choix, nbJour; // choix de l'utilisateur et nombre de jour trouvé pour un motif donné
-    char       motif[11]; // contient le motif donné par l'utilisateur
+    int        choix, nbJour, jourASupp; // choix de l'utilisateur, nombre de jour trouvé pour un motif donné et jour à supprimer
+    char       motif[11], anneeASupp[11], numSemASupp[3], heureASupp[3]; // motif donné par l'utilisateur, Annee a supprimer, numero de semaine a supprimer, heure a supprimer
     ListeSem_t liste = initSem(); // initialisation de la liste
     Jour_t     jourTab[MAX_JOUR], * finJourTab; // initialisation tableau de jours statique et pointeur de fin
 
@@ -48,13 +48,10 @@ void menu(char* nomFichier){
 
         }
 
-    while(choix>0 && choix<4)
+    while(choix>0 && choix<6)
     {
         switch(choix)
         {
-            case 0:
-                exit(1);
-                break;
             case 1:
                 
                 afficherListeSem(liste);
@@ -69,8 +66,31 @@ void menu(char* nomFichier){
                 afficherTableauParMotif(jourTab, motif, nbJour);
                 break;
             case 4:
+                printf("Donnez l'annee de l'action à supprimer :\n");
+                scanf("%s", anneeASupp);
+
+                printf("Donnez le numéro de semaine de l'action à supprimer :\n");
+                scanf("%s", numSemASupp);
+
+                printf("Donnez le jour de l'action à supprimer :\n");
+                while(scanf("%d", &jourASupp)==0)
+                {
+                    printf("Les informations rentrées ne sont pas dans le bon format\n");
+                    printf("Donnez le jour de l'action à supprimer :\n");
+                    scanf("%d", &jourASupp);
+                    getchar();
+                }
+
+                printf("Donnez l'heure de l'action à supprimer :\n");
+                scanf("%s", heureASupp);
+
+                supprimerAction(liste, anneeASupp, numSemASupp, jourASupp, heureASupp);
+                break;
+            case 5:
+                exit(0);
                 break;
         }
+
         affichMenu();
         printf("Tapez votre choix :\n");
         while(scanf("%d",&choix)==0)

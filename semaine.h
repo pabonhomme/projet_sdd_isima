@@ -31,7 +31,7 @@ typedef struct maillonSem_t
     struct maillonSem_t * suiv;
 }MaillonSem_t, *ListeSem_t;
 
-// FONCTIONS LISTE SEMAINE
+// ------------------FONCTIONS LISTE SEMAINES-------------------------------------
 ListeSem_t initSem(void);
 Boolen_t   videListeSem(ListeSem_t liste);
 Semaine_t  tete(ListeSem_t liste);
@@ -42,8 +42,12 @@ ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
 void afficherSemaine(Semaine_t sem);
 void afficherListeSem(ListeSem_t liste);
 
-Boolen_t   rechSemaine(ListeSem_t liste, char annee[], char sem[]);
 Semaine_t  lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
 
 void sauvegarder(char* nomFichier, ListeSem_t listeSemaines);
+
+Boolen_t rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour, char heure[]);
+void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure);
+
+// -------------------------------------------------------------------------------

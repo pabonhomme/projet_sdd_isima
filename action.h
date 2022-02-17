@@ -35,7 +35,7 @@ typedef struct maillonAction_t
     struct maillonAction_t * suiv;
 }MaillonAction_t, *ListeAction_t;
 
-// FONCTIONS LISTE ACTIONS
+// ------------------FONCTIONS LISTE ACTIONS-------------------------------------
 ListeAction_t initAction(void);
 Boolen_t      videListeAction(ListeAction_t liste);
 Action_t      teteAction(ListeAction_t liste);
@@ -46,6 +46,10 @@ ListeAction_t insererAction(ListeAction_t liste, Action_t a);
 void afficherAction(Action_t act);
 void afficherListeActions(ListeAction_t liste);
 
-Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
-
 void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* numSem);
+
+Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
+ListeAction_t supprimerEnTeteAction(ListeAction_t liste);
+ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure);
+
+// -------------------------------------------------------------------------------
