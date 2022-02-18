@@ -266,6 +266,5 @@ void libererActions(ListeAction_t liste)
     while(!videListeAction(liste))
     {
         liste = supprimerEnTeteAction(liste);
-        liste = liste->suiv;
     }
 }

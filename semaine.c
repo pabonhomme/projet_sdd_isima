@@ -330,6 +330,5 @@ void libererSemaines(ListeSem_t liste)
     {
         libererActions((liste->semaine).actions);
         liste = supprimerEnTeteSemaine(liste);
-        liste = liste->suiv;
     }
 }
