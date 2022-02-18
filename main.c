@@ -87,6 +87,7 @@ void menu(char* nomFichier){
                 supprimerAction(liste, anneeASupp, numSemASupp, jourASupp, heureASupp);
                 break;
             case 5:
+                libererSemaines(liste);
                 exit(0);
                 break;
         }

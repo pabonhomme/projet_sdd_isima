@@ -50,4 +50,6 @@ void sauvegarder(char* nomFichier, ListeSem_t listeSemaines);
 Boolen_t rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour, char heure[]);
 void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure);
 
+ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste);
+void libererSemaines(ListeSem_t liste);
 // -------------------------------------------------------------------------------

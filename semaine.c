@@ -300,3 +300,36 @@ void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char
         printf("L'action a supprimer n'existe pas");
     }
 }
+
+/* --------------------------------------------------------------------
+supprimerEnTeteSemaine : Supprime la semaine en tête de la liste
+ 
+En entrée: liste : la liste des semaines;
+
+En sortie: La liste avec l'element supprimé
+
+ -------------------------------------------------------------------- */
+ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste)
+{
+    MaillonSem_t *maillonSemTemp; // Maillon temporaire qui va permettre de supprimer la tête de liste 
+    if(videListeSem(liste)) // si la liste est vide on ne peut rien supprimer, c'est un cas d'erreur
+    {
+        printf("Suppression d'une semaine sur une liste vide, operation interdite");
+        exit(1);
+    }
+    maillonSemTemp = liste; // recuperation de la semaine en tête de liste
+    liste = liste->suiv; // on avance la liste sur le maillon suivant
+    free(maillonSemTemp); // on libere le maillon en tete
+    return liste;
+}
+
+void libererSemaines(ListeSem_t liste)
+{
+
+    while(!videListeSem(liste))
+    {
+        libererActions((liste->semaine).actions);
+        liste = supprimerEnTeteSemaine(liste);
+        liste = liste->suiv;
+    }
+}

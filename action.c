@@ -259,3 +259,13 @@ ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure)
     liste->suiv=supprimerMaillonAction(liste->suiv, jour, heure); // appel recursif
     return liste;
 }
+
+void libererActions(ListeAction_t liste)
+{
+
+    while(!videListeAction(liste))
+    {
+        liste = supprimerEnTeteAction(liste);
+        liste = liste->suiv;
+    }
+}
