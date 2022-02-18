@@ -52,5 +52,5 @@ Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
 ListeAction_t supprimerEnTeteAction(ListeAction_t liste);
 ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure);
 
-void libererActions(ListeAction_t liste)
+void libererActions(ListeAction_t liste);
 // -------------------------------------------------------------------------------
