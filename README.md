@@ -8,11 +8,11 @@ d'actions possible.
 
 Une ligne du fichier "semaines.txt" se présente sous cette forme : 202201108TPs de SDD
 <!-- -->
-2022 -> année de la semaine
-01   -> numéro de la semaine (01 à 52)
-1    -> jour de la semaine (1 à 7)
-08   -> heure de la journée (01 à 24)
-TPs de SDD -> nom de l'action
++ 2022 -> année de la semaine
++ 01   -> numéro de la semaine (01 à 52)
++ 1    -> jour de la semaine (1 à 7)
++ 08   -> heure de la journée (01 à 24)
++ TPs de SDD -> nom de l'action
 
 Lors de la lecture, nous avons décidé de séparer ces informations en deux structures.
 Une Semaine_t qui contient l'année et le numéro de semaine, l'autre nommé Action_t contient
@@ -35,11 +35,11 @@ Pour lancer le menu :
 + Lancez la commande make à partir du dossier de projet
 + Executez ensuite avec la commande : ./projet semaines.txt
 
-La lecture du fichier "semaines.txt" se fait dès le lancement. 
-Pour afficher les semaines et les actions : tapez 1.
-Pour sauvegarder les listes dans le fichier "sauvegarde.txt" : tapez 2.
-Pour afficher tous les jours contenant un dont le nom de l'action contient un motif précis : tapez 3 et donnez le motif
-Pour supprimer une action : tapez 4 et donnez les informations de l'action à supprimer.
+La lecture du fichier "semaines.txt" se fait dès le lancement.  
+Pour afficher les semaines et les actions : tapez 1.  
+Pour sauvegarder les listes dans le fichier "sauvegarde.txt" : tapez 2.  
+Pour afficher tous les jours contenant un dont le nom de l'action contient un motif précis : tapez 3 et donnez le motif.  
+Pour supprimer une action : tapez 4 et donnez les informations de l'action à supprimer.	 
 
 ## Langages utilisés ?
 
