@@ -58,7 +58,7 @@ Action_t teteAction(ListeAction_t liste)
     if(videListeAction(liste))
     {
         printf("Opération interdite\n");
-            exit(1);
+        exit(1);
     }
     else
     {
@@ -260,6 +260,14 @@ ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure)
     return liste;
 }
 
+/* --------------------------------------------------------------------
+libererActions : libère toute la liste des actions en supprimant chaque maillon
+ 
+En entrée: liste : la liste des actions;
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
 void libererActions(ListeAction_t liste)
 {
 

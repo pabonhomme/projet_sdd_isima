@@ -323,6 +323,14 @@ ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste)
     return liste;
 }
 
+/* --------------------------------------------------------------------
+libererSemaines : libère toute la liste des semaines en supprimant chaque maillon
+ 
+En entrée: liste : la liste des semaines;
+
+En sortie: void
+
+ -------------------------------------------------------------------- */
 void libererSemaines(ListeSem_t liste)
 {
 

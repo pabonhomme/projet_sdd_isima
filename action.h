@@ -10,7 +10,7 @@
  */
 
 #ifndef projet
-#define projet
+#define projet // variable qui permet d'éviter les inclusions infinies
 
 #include <stdio.h>
 #include <stdlib.h>

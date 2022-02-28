@@ -10,7 +10,7 @@
  */
 
 #ifndef projet
-#define projet
+#define projet // variable qui permet d'éviter les inclusions infinies
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +19,7 @@
 #include "semaine.h"
 #endif
 
-#define MAX_JOUR 15 // taille maximale du tableau de jours pour un motif donné
+#define MAX_JOUR 8 // taille maximale du tableau de jours pour un motif donné
 
 typedef struct 
 {
@@ -30,5 +30,9 @@ typedef struct
     char nomAction[11];
 }Jour_t;
 
+// ------------------FONCTIONS JOURS-------------------------------------
+
 int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jour_t *finJourTab);
 void afficherTableauParMotif(Jour_t jourTab[], char* motif, int nbJour);
+
+// -------------------------------------------------------------------------------

@@ -13,17 +13,20 @@
 
 void affichMenu(void) 
 {   
-    printf("\n\n             *******************************************************\n");
-        printf("             *                                                      *\n");
-        printf("             *                 Gestion semaines                     *\n");
-        printf("             *                                                      *\n");
-        printf("             *******************************************************\n");
-        printf("\n                 1- Afficher les listes                                                                            \n ");
-        printf("\n                 2- Sauvegarder la liste                                                         \n ");
-        printf("\n                 3- Afficher les jours à partir d'un motif (Donnez un motif)                                            \n ");
-        printf("\n                 4- Suppression d'une action                                                     \n");
-        printf("\n                 5- quitter                                                                       \n");
-        printf("\n              *****************************************************\n");
+    printf("\n                                    GESTION DE L'ECHEANCIER                     ");
+    printf("\n\n\t╔═══════════════════════════════════════════════════════════════════════════╗\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t1- Afficher les semaines et les actions                             ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t2- Sauvegarder la liste dans le fichier \"sauvegarde.txt\"            ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t3- Afficher les jours à partir d'un motif (Donnez un motif)         ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t4- Suppression d'une action                                         ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t5- Quitter                                                          ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t╚═══════════════════════════════════════════════════════════════════════════╝\n\n");
 }
 
 void menu(char* nomFichier){
