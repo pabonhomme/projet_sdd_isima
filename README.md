@@ -39,7 +39,7 @@ La lecture du fichier "semaines.txt" se fait dès le lancement.
 Pour afficher les semaines et les actions : tapez 1.  
 Pour sauvegarder les listes dans le fichier "sauvegarde.txt" : tapez 2.  
 Pour afficher tous les jours dont le nom de l'action contient un motif précis : tapez 3 et donnez le motif.  
-Pour supprimer une action : tapez 4 et donnez les informations de l'action à supprimer.	 
+Pour supprimer une action : tapez 4 et donnez les informations de l'action à supprimer.  
 Pour lancer la série de test : tapez 5.  
 
 + Pour supprimer les fichiers .o : make clean
