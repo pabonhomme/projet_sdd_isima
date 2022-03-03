@@ -42,6 +42,9 @@ Pour afficher tous les jours dont le nom de l'action contient un motif précis :
 Pour supprimer une action : tapez 4 et donnez les informations de l'action à supprimer.	 
 Pour lancer la série de test : tapez 5.  
 
++ Pour supprimer les fichiers .o : make clean
++ Pour supprimer les fichiers .o et l'executable : make rmExec  
+
 ## Langages utilisés ?
 
 + C
