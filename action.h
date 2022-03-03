@@ -43,14 +43,14 @@ Action_t      teteAction(ListeAction_t liste);
 ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a);
 ListeAction_t insererAction(ListeAction_t liste, Action_t a);
 
-void afficherAction(Action_t act);
-void afficherListeActions(ListeAction_t liste);
+void          afficherAction(Action_t act);
+void          afficherListeActions(ListeAction_t liste);
 
-void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* numSem);
+void          sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* numSem);
 
-Boolen_t rechAction(ListeAction_t liste, int jour, char heure[]);
+Boolen_t      rechAction(ListeAction_t liste, int jour, char heure[]);
 ListeAction_t supprimerEnTeteAction(ListeAction_t liste);
 ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure);
 
-void libererActions(ListeAction_t liste);
+void          libererActions(ListeAction_t liste);
 // -------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ EXEC=projet
 
 all: $(EXEC)
 
-projet: main.o semaine.o jour.o action.o
+projet: main.o semaine.o jour.o action.o test.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 	@echo "\nLancer le programme avec ./projet semaines.txt"
 
@@ -17,6 +17,9 @@ semaine.o: semaine.c semaine.h
 
 jour.o: jour.c jour.h
 	$(CC) -o $@ -c $< $(CFLAGS)
+
+test.o: test.c jour.h
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 main.o: main.c jour.h
 	$(CC) -o $@ -c $< $(CFLAGS) 

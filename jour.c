@@ -67,12 +67,17 @@ En sortie: void
 void afficherTableauParMotif(Jour_t jourTab[], char* motif, int nbJour)
 {
 	int i = 0;
-	printf("Liste des jours contenant le motif : %s\n", motif);
-	printf("nbJour : %d\n", nbJour);
-	for(i = 0; i < nbJour; i++)
+	if(nbJour != 0)
 	{
+		printf("Liste des jours contenant le motif : \"%s\"\n", motif);
+		printf("nbJour : %d\n", nbJour);
+		for(i = 0; i < nbJour; i++)
+		{
+			printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
+    		printf("\nNom de l\'action : %s\nAnnee : %s\t Semaine : %s\t Jour : %d\t Heure : %s\n",jourTab[i].nomAction, jourTab[i].annee, jourTab[i].numSem, jourTab[i].jour, jourTab[i].heure);
+		}
 		printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
-    	printf("\nNom de l\'action : %s\nAnnee : %s\t Semaine : %s\t Jour : %d\t Heure : %s\n",jourTab[i].nomAction, jourTab[i].annee, jourTab[i].numSem, jourTab[i].jour, jourTab[i].heure);
 	}
-	printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
+	else
+		printf("Aucune action contenant le motif \"%s\"\n", motif);
 }

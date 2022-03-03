@@ -39,17 +39,18 @@ Semaine_t  tete(ListeSem_t liste);
 ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s);
 ListeSem_t inserer(ListeSem_t liste, Semaine_t sem);
 
-void afficherSemaine(Semaine_t sem);
-void afficherListeSem(ListeSem_t liste);
+void       afficherSemaine(Semaine_t sem);
+void       afficherListeSem(ListeSem_t liste);
 
 Semaine_t  lireSemaine (FILE *flot);
 ListeSem_t chargeSemaine (char* nomFichier, ListeSem_t liste);
 
-void sauvegarder(char* nomFichier, ListeSem_t listeSemaines);
+void       sauvegarder(char* nomFichier, ListeSem_t listeSemaines);
 
-Boolen_t rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour, char heure[]);
-void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure);
+Boolen_t   rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour, char heure[]);
+Boolen_t   supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure);
 
 ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste);
-void libererSemaines(ListeSem_t liste);
+ListeSem_t supprimerMaillonSemaine(ListeSem_t liste, char* annee, char* numSem);
+void       libererSemaines(ListeSem_t liste);
 // -------------------------------------------------------------------------------

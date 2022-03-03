@@ -24,7 +24,9 @@ void affichMenu(void)
     printf("\t║                                                                           ║\n");
     printf("\t║\t4- Suppression d'une action                                         ║\n");
     printf("\t║                                                                           ║\n");
-    printf("\t║\t5- Quitter                                                          ║\n");
+    printf("\t║\t5- Lancer la série de tests                                         ║\n");
+    printf("\t║                                                                           ║\n");
+    printf("\t║\t6- Quitter                                                          ║\n");
     printf("\t║                                                                           ║\n");
     printf("\t╚═══════════════════════════════════════════════════════════════════════════╝\n\n");
 }
@@ -48,10 +50,9 @@ void menu(char* nomFichier){
             printf("Tapez votre choix :\n");
             scanf("%d",&choix);
             getchar();
-
         }
 
-    while(choix>0 && choix<6)
+    while(choix>0 && choix<7)
     {
         switch(choix)
         {
@@ -87,9 +88,15 @@ void menu(char* nomFichier){
                 printf("Donnez l'heure de l'action à supprimer :\n");
                 scanf("%s", heureASupp);
 
-                supprimerAction(liste, anneeASupp, numSemASupp, jourASupp, heureASupp);
+                if(supprimerAction(liste, anneeASupp, numSemASupp, jourASupp, heureASupp)) // si la semaine contenant l'action à supprimer ne contient plus d'action 
+                {
+                    liste = supprimerMaillonSemaine(liste, anneeASupp, numSemASupp); // on supprime cette semaine vide de la liste
+                }
                 break;
             case 5:
+                mainTest(liste);
+                break;
+            case 6:
                 libererSemaines(liste);
                 exit(0);
                 break;

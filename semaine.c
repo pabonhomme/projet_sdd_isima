@@ -282,8 +282,10 @@ heure : heure de l'action a supprimer ;
 En sortie: void
 
  -------------------------------------------------------------------- */
-void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure)
+Boolen_t supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char* heure)
 {   
+    Boolen_t listeActionVide = faux; // permet de savoir si l'action a été supprimée quand on parcours la liste
+
     if(rechSemaineAction(liste, annee, numSem, jour, heure)) // si l'action existe dans la liste
     {
         while(liste!=NULL)
@@ -291,14 +293,17 @@ void supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, char
             if(strcmp((liste->semaine).annee, annee) == 0 && strcmp((liste->semaine).numSem, numSem) == 0) // si on trouve la semaine voulue
             {
                 (liste->semaine).actions = supprimerMaillonAction((liste->semaine).actions, jour, heure); // suppression de l'action dans la liste d'actions
+                listeActionVide = videListeAction((liste->semaine).actions); // si la liste des actions est vide après suppression on notifie que l'on doit supprimer la semaine de la liste
             }
-            liste=liste->suiv;
+            liste = liste->suiv;
         }
-        printf("La suppression a ete effectuee");
+        printf("La suppression a ete effectuee\n");
     }
     else{
-        printf("L'action a supprimer n'existe pas");
+        printf("L'action a supprimer n'existe pas\n");
     }
+
+    return listeActionVide;
 }
 
 /* --------------------------------------------------------------------
@@ -320,6 +325,36 @@ ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste)
     maillonSemTemp = liste; // recuperation de la semaine en tête de liste
     liste = liste->suiv; // on avance la liste sur le maillon suivant
     free(maillonSemTemp); // on libere le maillon en tete
+    return liste;
+}
+
+/* --------------------------------------------------------------------
+supprimerMaillonSemaine : Supprime la semaine en fonction de l'année et du numéro de semaine
+ 
+En entrée: 
+liste : la liste des actions ; 
+annee : annee de la semaine ; 
+heure : numero de la semaine ;
+
+En sortie: La liste avec l'element supprimé ou non
+
+ -------------------------------------------------------------------- */
+ListeSem_t supprimerMaillonSemaine(ListeSem_t liste, char* annee, char* numSem)
+{   
+    Semaine_t semaineTemp;
+
+    if(videListeSem(liste)) // si la liste est vide, on retourne la liste
+        return liste;
+
+    semaineTemp = tete(liste);
+    if(semaineTemp.annee > annee) // si l'annee en tete est > a l'annee voulue -> semaine pas dans la liste
+        return liste;
+    if(strcmp(semaineTemp.annee, annee) && strcmp(semaineTemp.numSem, numSem) > 0) // si le jour en tete est = au jour voulu et l'heure > -> action pas dans la liste
+        return liste;
+    if(strcmp(semaineTemp.annee, annee) == 0 && strcmp(semaineTemp.numSem, numSem) == 0) // si la tete vaut la semaine voulue
+        return supprimerEnTeteSemaine(liste); // on la supprime
+
+    liste->suiv=supprimerMaillonSemaine(liste->suiv, annee, numSem); // appel recursif
     return liste;
 }
 

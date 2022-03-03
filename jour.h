@@ -32,7 +32,9 @@ typedef struct
 
 // ------------------FONCTIONS JOURS-------------------------------------
 
-int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jour_t *finJourTab);
+int  tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jour_t *finJourTab);
 void afficherTableauParMotif(Jour_t jourTab[], char* motif, int nbJour);
 
-// -------------------------------------------------------------------------------
+// ---------------------FONCTIONS DE TEST----------------------------------------------------------
+
+void mainTest(ListeSem_t liste);
