@@ -82,8 +82,8 @@ ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s)
         printf("Probleme malloc\n");
         exit(1);
     }
-    sem->semaine = s;
-    sem->suiv=liste;
+    sem->semaine = s; // mise à jour de la semaine dans le maillon
+    sem->suiv=liste; // insertion en tête de la liste en faisant pointer le maillon sur la liste
 
     return sem;
 }

@@ -86,8 +86,8 @@ ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a)
         printf("Probleme malloc\n");
         exit(1);
     }
-    act->action = a;
-    act->suiv=liste;
+    act->action = a; // mise à jour de l'action dans le maillon
+    act->suiv=liste; // insertion en tête de la liste en faisant pointer le maillon sur la liste
     return act;
 }
 
