@@ -23,7 +23,6 @@ void mainTest(ListeSem_t liste)
     printf("\n\n═════════════════════INITIALISATION ET LECTURE DU FICHIER═════════════════════\n");
 
     printf("\nAppuyez sur entrée pour afficher la liste des semaines\n");
-    getchar();
 	while( getchar() != '\n' );
 
 	printf("\n\n═════════════════════AFFICHAGE DE LA LISTE DES SEMAINES═════════════════════\n");

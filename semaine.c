@@ -16,7 +16,7 @@ initSem : Initialise une liste
  
 En entrée: void
 
-En sortie: 
+En sortie: la liste initialisée à NULL
 
  -------------------------------------------------------------------- */
 ListeSem_t initSem(void)
