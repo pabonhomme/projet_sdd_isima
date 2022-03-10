@@ -28,7 +28,7 @@ ListeAction_t initAction(void)
 videListeAction : Vérifie si une liste est vide
  
 En entrée: 
-liste : la liste d'actions
+    ListeAction_t liste : la liste d'actions
 
 En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
@@ -44,12 +44,12 @@ Boolen_t videListeAction(ListeAction_t liste)
 }
 
 /* --------------------------------------------------------------------
-tete : Renvoie le premier maillon de la liste
+teteAction : Renvoie le premier maillon de la liste
  
 En entrée: 
-liste : la liste des actions
+    ListeAction_t liste : la liste des actions
 
-En sortie: la première action de la liste, NULL sinon
+En sortie: la première action de la liste, sinon exit
 
  -------------------------------------------------------------------- */
 Action_t teteAction(ListeAction_t liste)
@@ -70,8 +70,8 @@ Action_t teteAction(ListeAction_t liste)
 insererEnTeteAction : Insère une nouvelle action en tête de la liste
  
 En entrée: 
-liste : la liste des actions; 
-a : l'action à inserer;
+    ListeAction_t liste : la liste des actions; 
+    Action_t      a : l'action à inserer;
 
 En sortie: La liste avec l'élement en tête
 
@@ -92,11 +92,11 @@ ListeAction_t insererEnTeteAction(ListeAction_t liste, Action_t a)
 }
 
 /* --------------------------------------------------------------------
-insererAction : insère une action
+insererAction : insère une action en fonction de l'heure et du jour
  
 En entrée: 
-liste : la liste des actions; 
-a : l'action à inserer;
+    ListeAction_t liste : la liste des actions
+    Action_t      a : l'action à inserer
 
 En sortie: La liste avec l'élement inséré
 
@@ -129,7 +129,7 @@ ListeAction_t insererAction(ListeAction_t liste, Action_t a)
 afficherAction : Affiche une action
  
 En entrée: 
-act : une action;
+    Action_t act : une action;
 
 En sortie: void
 
@@ -143,7 +143,7 @@ void afficherAction(Action_t act)
 afficherListeActions : Affiche la liste des actions
  
 En entrée: 
-liste : la liste des actions;
+    ListeAction_t liste : la liste des actions;
 
 En sortie: void
 
@@ -160,10 +160,12 @@ void afficherListeActions(ListeAction_t liste)
 }
 
 /* --------------------------------------------------------------------
-sauvegarderAction : Ecris les semaines et actions en ligne comme le fichier initial dans un fichier
+sauvegarderAction : Ecrit les semaines et actions en ligne comme le fichier initial dans un fichier
  
-En entrée: nomFichier : Nom du fichier dans lequel ecrire ; liste : la liste des actions
-anneeSem : annee de la liste d'actions ; numSem : numero de semaine de la liste d'actions
+En entrée: 
+    File          * flot: fichier dans lequel ecrire
+    ListeAction_t liste: la liste des actions
+    char          * anneeSem : annee de la liste d'actions  numSem : numero de semaine de la liste d'actions
 
 En sortie: void
 
@@ -186,11 +188,12 @@ void sauvegarderAction(FILE *flot, ListeAction_t liste, char* anneeSem, char* nu
 }
 
 /* --------------------------------------------------------------------
-rechAction : recherche une action
+rechAction : recherche une action selon l'heure et le jour
  
 En entrée: 
-liste : la liste des actions; 
-jour et heure : le jour et l'heure de l'action à trouver
+    ListeAction_t liste : la liste des actions;
+    int           jour : le jour de l'action à trouver
+    char          heure[] : l'heure de l'action à trouver
 
 En sortie: un Boolen, vrai si l'action existe, faux sinon
 
@@ -213,7 +216,8 @@ Boolen_t rechAction(ListeAction_t liste, int jour, char heure[])
 /* --------------------------------------------------------------------
 supprimerEnTeteAction : Supprime l'action en tête de la liste
  
-En entrée: liste : la liste des actions;
+En entrée: 
+    ListeAction_t liste : la liste des actions
 
 En sortie: La liste avec l'element supprimé
 
@@ -236,9 +240,9 @@ ListeAction_t supprimerEnTeteAction(ListeAction_t liste)
 supprimerMaillonAction : Supprime l'action en fonction du jour et de l'heure
  
 En entrée: 
-liste : la liste des actions ; 
-jour : numero du jour ; 
-heure : heure de l'action a supprimer ;
+    ListeAction_t liste : la liste des actions 
+    int           jour : numero du jour ; 
+    char          * heure : heure de l'action a supprimer 
 
 En sortie: La liste avec l'element supprimé
 
@@ -263,7 +267,8 @@ ListeAction_t supprimerMaillonAction(ListeAction_t liste, int jour, char* heure)
 /* --------------------------------------------------------------------
 libererActions : libère toute la liste des actions en supprimant chaque maillon
  
-En entrée: liste : la liste des actions;
+En entrée: 
+    ListeAction_t liste : la liste des actions
 
 En sortie: void
 
