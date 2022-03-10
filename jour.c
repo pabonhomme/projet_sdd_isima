@@ -52,7 +52,7 @@ int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jou
     	}
         listeSemaines = listeSemaines->suiv; // on avance dans les semaines
     }
-
+    
     return i;
 }
 

@@ -65,7 +65,7 @@ void menu(char* nomFichier){
 
             printf("Tapez votre choix :\n");
             scanf("%d",&choix);
-            getchar();
+            viderBuffer();
         }
 
     while(choix>0 && choix<7)
@@ -114,6 +114,7 @@ void menu(char* nomFichier){
                 break;
             case 6:
                 libererSemaines(liste); // libère la mémoire utilisée avant de quitter le programme
+                free(finJourTab);
                 exit(0);
                 break;
         }
@@ -127,7 +128,7 @@ void menu(char* nomFichier){
 
                 printf("Tapez votre choix :\n");
                 scanf("%d",&choix);
-                getchar();
+                viderBuffer();
             }
     }
 }

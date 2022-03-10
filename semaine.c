@@ -303,7 +303,7 @@ Boolen_t supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, 
         printf("La suppression a ete effectuee\n");
     }
     else{
-        printf("L'action a supprimer n'existe pas\n");
+        printf("L'action à supprimer n'existe pas\n");
     }
 
     return listeActionVide;
