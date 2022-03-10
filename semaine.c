@@ -247,9 +247,12 @@ void sauvegarder(char* nomFichier, ListeSem_t listeSemaines)
 /* --------------------------------------------------------------------
 rechSemaineAction : recherche une semaine, puis une action si la semaine est trouvée
  
-En entrée: liste : la liste des semaines; 
-annee et sem : l'année et la semaine à trouver
-jour et heure : me jour et l'heure de l'action à trouver
+En entrée: 
+ListeSem_t liste : la liste des semaines
+char     * annee : l'année à trouver
+char     * sem : la semaine à trouver
+int        jour : le jour à trouver
+char    *  heure : l'heure de l'action à trouver
 
 En sortie: un Boolen, vrai si l'action existe, faux sinon
 
