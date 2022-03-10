@@ -313,10 +313,10 @@ Boolen_t supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, 
             }
             liste = liste->suiv;
         }
-        printf("La suppression a ete effectuee\n");
+        printf("\nLa suppression a ete effectuee\n");
     }
     else{
-        printf("L'action à supprimer n'existe pas\n");
+        printf("\nL'action à supprimer n'existe pas\n");
     }
 
     return listeActionVide;
@@ -387,7 +387,7 @@ En sortie: void
 void libererSemaines(ListeSem_t liste)
 {
 
-    while(!videListeSem(liste)// tant que la liste n'est pas vide
+    while(!videListeSem(liste))// tant que la liste n'est pas vide
     {
         libererActions((liste->semaine).actions);
         liste = supprimerEnTeteSemaine(liste);// on supprime la semaine en tete

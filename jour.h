@@ -37,7 +37,7 @@ void afficherTableauParMotif(Jour_t jourTab[], char* motif, int nbJour);
 
 // ---------------------FONCTIONS DE TEST----------------------------------------------------------
 
-void mainTest(ListeSem_t liste);
+void mainTest(char *nomFichier);
 
 // ---------------------FONCTIONS LECTURE----------------------------------------------------------
 void viderBuffer();

@@ -11,13 +11,14 @@
 
 #include "jour.h"
 
-void mainTest(ListeSem_t liste)
+void mainTest(char *nomFichier)
 {
 	int        nbJour, jourASupp; // choix de l'utilisateur, nombre de jour trouvé pour un motif donné et jour à supprimer
     char       motif[11], anneeASupp[11], numSemASupp[3], heureASupp[3]; // motif donné par l'utilisateur, Annee a supprimer, numero de semaine a supprimer, heure a supprimer
-
+    ListeSem_t liste = initSem(); // initialisation de la liste
     Jour_t     jourTab[MAX_JOUR], * finJourTab; // initialisation tableau de jours statique et pointeur de fin
 
+    liste = chargeSemaine(nomFichier, liste); // chargement des semaines à partir du nom de fichier
     finJourTab = &jourTab[MAX_JOUR]; // affectation du pointeur de fin du tableau de jour
 
     printf("\n\n═════════════════════INITIALISATION ET LECTURE DU FICHIER═════════════════════\n");
@@ -117,5 +118,4 @@ void mainTest(ListeSem_t liste)
 
 	printf("\n\n═════════════════════FIN DE LA SERIE DE TEST═════════════════════\n");
 	libererSemaines(liste);
-
 }

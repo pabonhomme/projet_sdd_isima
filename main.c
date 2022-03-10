@@ -93,11 +93,11 @@ void menu(char* nomFichier){
                 lireChaine(numSemASupp, 3); // lecture du numéro de la semaine à supprimer rentré par l'utilisateur
 
                 printf("Donnez le jour de l'action à supprimer :\n");
-                while(scanf("%d", &jourASupp)==0)
+                while(scanf("%d%*c", &jourASupp)==0)
                 {
                     printf("Les informations rentrées ne sont pas dans le bon format\n");
                     printf("Donnez le jour de l'action à supprimer :\n");
-                    scanf("%d", &jourASupp);
+                    scanf("%d%*c", &jourASupp);
                     getchar();
                 }
 
@@ -110,11 +110,10 @@ void menu(char* nomFichier){
                 }
                 break;
             case 5:
-                mainTest(liste); // fonction de tests
+                mainTest(nomFichier); // fonction de tests
                 break;
             case 6:
                 libererSemaines(liste); // libère la mémoire utilisée avant de quitter le programme
-                free(finJourTab);
                 exit(0);
                 break;
         }
@@ -155,8 +154,9 @@ lireChaine : Permet de récuperer une chaine de caractère en fonction d'une tai
 
 Cela permet d'éviter les cas où l'utilisateur rentre plus de caractères que la chaine peut en contenir (erreur avec un scanf)
  
-En entrée: chaine : la chaine de caractère à remplir
-           longueur : taille de la chaine de caractère
+En entrée: 
+        char * chaine : la chaine de caractère à remplir
+        int    longueur : taille de la chaine de caractère
 
 En sortie: void
 
@@ -185,7 +185,7 @@ void lireChaine(char *chaine, int longueur)
 
 int main(int argc, char *argv[])
 {
-    if(argc==2) // si l'utilisateur a bien fourni un argument lors de l'éxécution
+    if(argc==2) // si l'utilisateur a bien fourni un argument lors de l'exécution
     {
         menu(argv[1]);
     }
