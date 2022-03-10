@@ -27,7 +27,8 @@ ListeSem_t initSem(void)
 /* --------------------------------------------------------------------
 videListeSem : Vérifie si une liste est vide
  
-En entrée: la liste
+En entrée: 
+    ListeSem_t liste: la liste qu'on teste
 
 En sortie: un Boolen, vrai si la liste est vide, faux sinon
 
@@ -45,7 +46,8 @@ Boolen_t videListeSem(ListeSem_t liste)
 /* --------------------------------------------------------------------
 tete : Renvoie le premier maillon de la liste
  
-En entrée: la liste des semaines
+En entrée: 
+    ListeSem_t liste: la liste des semaines
 
 En sortie: la première semaine de la liste, NULL sinon
 
@@ -67,7 +69,9 @@ Semaine_t tete(ListeSem_t liste)
 /* --------------------------------------------------------------------
 insererEnTete : Insère une nouvelle semaine en tête de la liste
  
-En entrée: liste : la liste des semaines; s : la semaine à inserer
+En entrée: liste : 
+    ListeSem_t liste :la liste des semaines
+    Semaine_t  s : la semaine à inserer
 
 En sortie: La liste avec l'élement en tête
 
@@ -89,9 +93,11 @@ ListeSem_t insererEnTete(ListeSem_t liste, Semaine_t s)
 }
 
 /* --------------------------------------------------------------------
-inserer : insère une semaine
+inserer : insère une semaine dans l'ordre des dates
  
-En entrée: liste : la liste des semaines; s : la semaine à inserer
+En entrée: 
+    ListeSem_t liste : la liste des semaines
+    Semaine_t  s : la semaine à inserer
 
 En sortie: La liste avec l'élement inséré
 
@@ -129,7 +135,8 @@ ListeSem_t inserer(ListeSem_t liste, Semaine_t sem)
 /* --------------------------------------------------------------------
 afficherSemaine : Affiche une semaine
  
-En entrée: sem : une semaine;
+En entrée: 
+    Semaine_t sem : la semaine qu'on veut afficher 
 
 En sortie: void
 
@@ -142,7 +149,8 @@ void afficherSemaine(Semaine_t sem)
 /* --------------------------------------------------------------------
 afficherListeSem : Affiche la liste des semaines
  
-En entrée: liste : la liste des semaines;
+En entrée: 
+    ListeSem_t liste : la liste des semaines
 
 En sortie: void
 
@@ -153,17 +161,18 @@ void afficherListeSem(ListeSem_t liste)
     while(!videListeSem(liste))
     {
         afficherSemaine(liste->semaine);
-        if(!videListeAction((liste->semaine).actions))
-            afficherListeActions((liste->semaine).actions);
+        if(!videListeAction((liste->semaine).actions)) // on vérifie si la semaine contient des actions 
+            afficherListeActions((liste->semaine).actions); // si la semaine contient des actions, on les affcihe aussi
         printf("\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n");
-        liste=liste->suiv;
+        liste=liste->suiv; // on passe à la semaine suivante
     }
 }
 
 /* --------------------------------------------------------------------
 lireSemaine : lis une ligne du fichier
  
-En entrée: flot : pointeur sur le fichier à lire
+En entrée: 
+    FILE * flot : pointeur sur le fichier à lire
 
 En sortie: semaine lue
 
@@ -174,7 +183,7 @@ Semaine_t lireSemaine (FILE *flot)
     char      jour;
 
     fscanf(flot,"%4s %2s %c %2s %[^\n]%*c", sem.annee, sem.numSem, &jour, act.heure, act.nom); // lecture d'une ligne 
-    act.jour = jour - '0';
+    act.jour = jour - '0'; // transformation d'un entier en caractère
     sem.actions = insererAction(initAction(), act); // on crée un premier maillon pour la liste d'actions de la semaine
     
     return sem;
@@ -183,7 +192,9 @@ Semaine_t lireSemaine (FILE *flot)
 /* --------------------------------------------------------------------
 chargeSemaine : charge les semaines à partir d'un fichier
  
-En entrée: nomFichier : Nom du fichier à lire ; liste : la liste des semaines
+En entrée: 
+    char       * nomFichier : Nom du fichier à lire 
+    ListeSem_t listeSemaines : la liste des semaines
 
 En sortie: La liste avec les semaines insérées
 
@@ -219,7 +230,9 @@ ListeSem_t chargeSemaine(char* nomFichier, ListeSem_t listeSemaines)
 /* --------------------------------------------------------------------
 sauvegarder : sauvegarde les semaines et les actions dans un fichier
  
-En entrée: nomFichier : Nom du fichier dans lequel ecrire ; listeSemaines : la liste des semaines
+En entrée: 
+    char  * nomFichier : Nom du fichier dans lequel on veut ecrire 
+    Liste listeSemaines : la liste des semaines
 
 En sortie: void
 
@@ -248,11 +261,11 @@ void sauvegarder(char* nomFichier, ListeSem_t listeSemaines)
 rechSemaineAction : recherche une semaine, puis une action si la semaine est trouvée
  
 En entrée: 
-ListeSem_t liste : la liste des semaines
-char     * annee : l'année à trouver
-char     * sem : la semaine à trouver
-int        jour : le jour à trouver
-char    *  heure : l'heure de l'action à trouver
+    ListeSem_t liste : la liste des semaines
+    char     * annee : l'année à trouver
+    char     * sem : la semaine à trouver
+    int        jour : le jour à trouver
+    char     * heure : l'heure de l'action à trouver
 
 En sortie: un Boolen, vrai si l'action existe, faux sinon
 
@@ -276,11 +289,11 @@ Boolen_t rechSemaineAction(ListeSem_t liste, char annee[], char sem[], int jour,
 supprimerAction : Supprime l'action en fonction de l'annee et du jour et de l'heure
  
 En entrée: 
-liste : la liste des actions ; 
-annee : annee de la semaine qui contient l'action a supprimer
-numSem : numero de la semaine qui contient l'action a supprimer
-jour : numero du jour de l'action a supprimer ; 
-heure : heure de l'action a supprimer ;
+    ListeSem_t liste : la liste des actions 
+    char       * annee : annee de la semaine qui contient l'action a supprimer
+    char       * numSem : numero de la semaine qui contient l'action a supprimer
+    int        jour : numero du jour de l'action a supprimer 
+    char       * heure : heure de l'action a supprimer 
 
 En sortie: void
 
@@ -312,7 +325,8 @@ Boolen_t supprimerAction(ListeSem_t liste, char* annee, char* numSem, int jour, 
 /* --------------------------------------------------------------------
 supprimerEnTeteSemaine : Supprime la semaine en tête de la liste
  
-En entrée: liste : la liste des semaines;
+En entrée: 
+    ListeSem_t liste : la liste des semaines
 
 En sortie: La liste avec l'element supprimé
 
@@ -335,9 +349,9 @@ ListeSem_t supprimerEnTeteSemaine(ListeSem_t liste)
 supprimerMaillonSemaine : Supprime la semaine en fonction de l'année et du numéro de semaine
  
 En entrée: 
-liste : la liste des actions ; 
-annee : annee de la semaine ; 
-heure : numero de la semaine ;
+    ListeSem_t liste : la liste des actions ; 
+    char       * annee : annee de la semaine ; 
+    char       * numSem : numero de la semaine ;
 
 En sortie: La liste avec l'element supprimé ou non
 
@@ -364,7 +378,8 @@ ListeSem_t supprimerMaillonSemaine(ListeSem_t liste, char* annee, char* numSem)
 /* --------------------------------------------------------------------
 libererSemaines : libère toute la liste des semaines en supprimant chaque maillon
  
-En entrée: liste : la liste des semaines;
+En entrée: 
+    ListeSem_t liste : la liste des semaines;
 
 En sortie: void
 
@@ -372,9 +387,9 @@ En sortie: void
 void libererSemaines(ListeSem_t liste)
 {
 
-    while(!videListeSem(liste))
+    while(!videListeSem(liste)// tant que la liste n'est pas vide
     {
         libererActions((liste->semaine).actions);
-        liste = supprimerEnTeteSemaine(liste);
+        liste = supprimerEnTeteSemaine(liste);// on supprime la semaine en tete
     }
 }

@@ -14,8 +14,11 @@
 /* --------------------------------------------------------------------
 tableauParMotif : Insère les actions contenant le motif voulu
  
-En entrée: motif : motif à rechercher ; listeSemaines : la liste des semaines ; jourTab : tableau des jours où l'action contient le motif
-finJourTab : pointeur sur la fin tu tableau de jour
+En entrée: 
+	char       * motif : motif à rechercher 
+	ListeSem_t listeSemaines : la liste des semaines 
+	Jour_t     jourTab[] : tableau des jours où l'action contient le motif
+    Jour_t     * finJourTab : pointeur sur la fin tu tableau de jour
 
 En sortie: int : le nombre de jour trouvé
 
@@ -59,7 +62,10 @@ int tableauParMotif(char* motif, ListeSem_t listeSemaines, Jour_t jourTab[], Jou
 /* --------------------------------------------------------------------
 afficherTableauParMotif : Affiche la liste des jours contenant le motif
 
-En entrée: jourTab : tableau des jours où l'action contient le motif ; motif : motif à rechercher ; nbJour : nombre de jour
+En entrée: 
+	Jour_t jourTab[] : tableau des jours où l'action contient le motif 
+	char   * motif : motif à rechercher 
+	int    nbJour : nombre de jour
 
 En sortie: void
 
